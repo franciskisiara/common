@@ -1,5 +1,5 @@
-export default class Errors{
-  constructor(fields) {
+export default class Errors {
+  constructor (fields) {
     this.errors = this.setErrors(fields)
   }
 
@@ -15,6 +15,9 @@ export default class Errors{
     return errors
   }
 
+  /**
+   * Checks if we have any errors in the error bag
+   */
   any () {
     for (let field in this.errors) {
       if (this.errors[field]) {
@@ -24,13 +27,10 @@ export default class Errors{
   }
 
   /*
-   * Checks if the errors object has a certain field
+   * Checks if the errors object has a certain field in the error bag
    */
   has (field) {
-    if (this.errors[field]) {
-      return true
-    }
-    return false
+    return Boolean(this.errors[field])
   }
 
   /*
@@ -55,13 +55,9 @@ export default class Errors{
    * Record the errors into the errors object
    */
   record (errors) {
-    // errors = errors.errors
-    // for (let error in errors) {
-    //   this.errors[error] = errors[error][0]
-    // }
     for (let index in errors) {
       let error = errors[index]
-      this.errors[error.field] = error.message;
+      this.errors[error.field] = error.message
     }
   }
 }
